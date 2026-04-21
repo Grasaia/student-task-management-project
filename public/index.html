@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Task Manager</title>
+  <meta name="description" content="A student task management system to create, view, update, and delete academic tasks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">📚</span>
+        <h1>Student Task Manager</h1>
+      </div>
+      <p class="tagline">Stay on top of every assignment &amp; deadline</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ── Task Form Card ───────────────────────────────────────────────────── -->
+    <section class="card form-card" aria-labelledby="formHeading">
+      <h2 id="formHeading" class="card-title">
+        <span id="formMode">➕ Add New Task</span>
+      </h2>
+
+      <form id="taskForm" novalidate>
+        <input type="hidden" id="task_id" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="title">Title <span class="required">*</span></label>
+            <input type="text" id="title" placeholder="e.g. Math Assignment #3" required />
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status">
+              <option value="pending">⏳ Pending</option>
+              <option value="in-progress">🔄 In Progress</option>
+              <option value="completed">✅ Completed</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="description">Description</label>
+            <textarea id="description" rows="3" placeholder="Optional details about the task..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="due_date">Due Date</label>
+            <input type="date" id="due_date" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="saveBtn" class="btn btn-primary">💾 Save Task</button>
+          <button type="button" id="cancelBtn" class="btn btn-ghost" style="display:none">✖ Cancel</button>
+        </div>
+
+        <p id="formError" class="form-error" role="alert" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- ── Tasks Table Card ─────────────────────────────────────────────────── -->
+    <section class="card table-card" aria-labelledby="tableHeading">
+      <div class="table-header">
+        <h2 id="tableHeading" class="card-title">📋 All Tasks</h2>
+        <div class="table-controls">
+          <input type="search" id="searchInput" class="search-box" placeholder="🔍 Search tasks..." aria-label="Search tasks" />
+          <select id="filterStatus" class="filter-select" aria-label="Filter by status">
+            <option value="">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="tasksTable" aria-label="Task list">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Due Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tasksBody">
+            <!-- Rows populated by script.js -->
+          </tbody>
+        </table>
+
+        <div id="emptyState" class="empty-state" style="display:none">
+          <span class="empty-icon">🗓️</span>
+          <p>No tasks yet — add your first one above!</p>
+        </div>
+
+        <div id="loadingState" class="loading-state">
+          <span class="spinner"></span> Loading tasks…
+        </div>
+      </div>
+
+      <p id="taskCount" class="task-count"></p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Student Task Management System &copy; 2026 &mdash; Savon &amp; Jayesh</p>
+  </footer>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
