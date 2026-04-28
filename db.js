@@ -4,9 +4,9 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: 'project1',
   user: 'root',
-  password: 'root',       // ← update if your MySQL root password is different
+  password: 'root1234',       // ← update if your MySQL root password is different
   database: 'task_manager'
 });
 
