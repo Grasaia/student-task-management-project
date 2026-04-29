@@ -1,18 +1,18 @@
-// db.js – MySQL connection configuration
+// db.js – MySQL connection using mysql2 (compatible with MySQL 8+)
 // Owned by: Savon
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  host: 'project1',
-  user: 'root',
-  password: 'root1234',       // ← update if your MySQL root password is different
+  host:     'localhost',
+  user:     'root',
+  password: 'whentheycryss5',
   database: 'task_manager'
 });
 
 connection.connect((err) => {
   if (err) {
-    console.error('Error connecting to MySQL:', err.message);
+    console.error('❌ Error connecting to MySQL:', err.message);
     process.exit(1);
   }
   console.log('✅ Connected to MySQL (task_manager database)');

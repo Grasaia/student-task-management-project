@@ -1,30 +1,29 @@
 // app.js – Main Express server entry point
-// Owned by: Savon
-
 const express = require('express');
 const path    = require('path');
 
 const app  = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // ── Middleware ────────────────────────────────────────────────────────────────
-app.use(express.json());                          // parse JSON request bodies
-app.use(express.urlencoded({ extended: true })); // parse URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// ── Static Files (Frontend) ───────────────────────────────────────────────────
-// Serve everything inside /public as static assets (index.html, script.js, etc.)
+// ── Static Files ──────────────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ── API Routes ────────────────────────────────────────────────────────────────
-const taskRoutes = require('./routes/tasks');
+const taskRoutes  = require('./routes/tasks');
+const statsRoutes = require('./routes/stats');
 app.use('/api/tasks', taskRoutes);
+app.use('/api/stats', statsRoutes);
 
-// ── Catch-all: serve index.html for any unknown route (SPA fallback) ──────────
+// ── SPA Fallback ──────────────────────────────────────────────────────────────
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ── Start Server ──────────────────────────────────────────────────────────────
 app.listen(port, () => {
-  console.log(`🚀 Student Task Manager running at http://localhost:${port}`);
+  console.log(`🚀 Taskify running at http://localhost:${port}`);
 });
